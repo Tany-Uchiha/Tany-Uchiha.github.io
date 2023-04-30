@@ -169,6 +169,13 @@ body {
     bottom: 100%;
   }
 }
+#table{
+ display:block;
+ position: absolute;
+ border:solid;
+ width:1000px;
+ background-color:white;
+}
 
 </style>
 </head>
@@ -250,12 +257,15 @@ xhr.onload = () => {
 	if (xhr.readyState === xhr.DONE && xhr.status === 200) {
                 
                 var json = JSON.parse(xhr.responseText);
-                var s = "";																								
+           var s = "<TABLE>";																								
 		for (row in json["results"][0]["resultSet"]) {
-		s +=json["results"][0]["resultSet"][row]["VAL"] + ": "+json["results"][0]["resultSet"][row]["TYPE"] + ". ";
+		s += "<TR>";
+		s += "<TD>"+json["results"][0]["resultSet"][row]["NAME"] + "</TD>"+ "<TD>"+json["results"][0]["resultSet"][row]["TYPE"] +"</TD>"+" ";
+		s += "<TR>";
   }
-                alert(s);
-                clothes.innerHTML = s;
+		s += "</TABLE>";
+                
+                table.innerHTML = s;
             }
 }
 xhr.send(JSON.stringify(body2));
@@ -264,6 +274,9 @@ xhr.send(JSON.stringify(body2));
 }
 
 </script>
+<div id = "table" align="center">
+
+</div>
 
 <div class="login-box">
   <h2>Поиск товара</h2>
